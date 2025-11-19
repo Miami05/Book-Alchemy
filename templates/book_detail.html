@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>{{ book.title }} - Details</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #ffffff;
+      }
+      h1 {
+        margin-top: 0;
+      }
+      nav {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      nav a {
+        margin: 0 10px;
+        text-decoration: none;
+        color: #007bff;
+      }
+      nav a:hover {
+        text-decoration: underline;
+      }
+      .meta p {
+        margin: 4px 0;
+      }
+      img {
+        margin-top: 10px;
+        max-height: 200px;
+      }
+      .back-link {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <nav>
+        <a href="{{ url_for('home') }}">Home</a> |
+        <a href="{{ url_for('add_author') }}">Add Author</a> |
+        <a href="{{ url_for('add_book') }}">Add Book</a>
+        <a href="{{ url_for('recommend') }}">Recommend</a>
+      </nav>
+
+      <h1>{{ book.title }}</h1>
+
+      <div class="meta">
+        {% if book.author %}
+          <p>Author:
+            <a href="{{ url_for('author_detail', author_id=book.author.id) }}">
+              {{ book.author.name }}
+            </a>
+          </p>
+        {% endif %}
+
+        {% if book.publication_year %}
+          <p>Publication year: {{ book.publication_year }}</p>
+        {% endif %}
+
+        {% if book.isbn %}
+          <p>ISBN: {{ book.isbn }}</p>
+        {% endif %}
+      </div>
+
+      {% if book.isbn %}
+        <img src="https://covers.openlibrary.org/b/isbn/{{ book.isbn }}-M.jpg"
+             alt="Cover for {{ book.title }}">
+      {% endif %}
+
+      <div class="back-link">
+        <a href="{{ url_for('home') }}">&larr; Back to all books</a>
+      </div>
+    </div>
+  </body>
+</html>

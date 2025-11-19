@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Book Recommendation</title>
+  </head>
+  <body>
+    <h1>AI Book Recommendation</h1>
+
+    <nav>
+      <a href="{{ url_for('home') }}">Home</a> |
+      <a href="{{ url_for('add_author') }}">Add Author</a> |
+      <a href="{{ url_for('add_book') }}">Add Book</a> |
+      <a href="{{ url_for('recommend') }}">Recommend</a>
+    </nav>
+
+    <h2>Your library</h2>
+    <pre>{{ library_description }}</pre>
+
+    <h2>Suggested book</h2>
+    {% if ai_response %}
+      <p>{{ ai_response }}</p>
+    {% else %}
+      <p>No AI response yet. Check your API key or provider.</p>
+    {% endif %}
+  </body>
+</html>
